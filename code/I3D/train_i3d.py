@@ -110,7 +110,8 @@ def run(configs,
             num_iter = 0
             optimizer.zero_grad()
 
-            confusion_matrix = np.zeros((num_classes, num_classes), dtype=np.int)
+            #sandrine is changing the np.ints to just int
+            confusion_matrix = np.zeros((num_classes, num_classes), dtype=int)
             # Iterate over data.
             for data in dataloaders[phase]:
                 num_iter += 1

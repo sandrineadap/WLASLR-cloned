@@ -66,6 +66,7 @@ def run(init_lr=0.1,
     test_transforms = transforms.Compose([videotransforms.CenterCrop(224)])
 
     val_dataset = Dataset(train_split, 'test', root, mode, test_transforms)
+    # print(val_dataset) # sandrine
     val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=1,
                                                  shuffle=False, num_workers=2,
                                                  pin_memory=False)
@@ -90,14 +91,25 @@ def run(init_lr=0.1,
     correct_5 = 0
     correct_10 = 0
 
-    top1_fp = np.zeros(num_classes, dtype=np.int)
-    top1_tp = np.zeros(num_classes, dtype=np.int)
+# sandrine is changing all the np.int to int since apparently it was deprecated/removed
+# https://stackoverflow.com/questions/74946845/attributeerror-module-numpy-has-no-attribute-int
+    # top1_fp = np.zeros(num_classes, dtype=np.int)
+    # top1_tp = np.zeros(num_classes, dtype=np.int)
 
-    top5_fp = np.zeros(num_classes, dtype=np.int)
-    top5_tp = np.zeros(num_classes, dtype=np.int)
+    # top5_fp = np.zeros(num_classes, dtype=np.int)
+    # top5_tp = np.zeros(num_classes, dtype=np.int)
 
-    top10_fp = np.zeros(num_classes, dtype=np.int)
-    top10_tp = np.zeros(num_classes, dtype=np.int)
+    # top10_fp = np.zeros(num_classes, dtype=np.int)
+    # top10_tp = np.zeros(num_classes, dtype=np.int)
+
+    top1_fp = np.zeros(num_classes, dtype=int)
+    top1_tp = np.zeros(num_classes, dtype=int)
+
+    top5_fp = np.zeros(num_classes, dtype=int)
+    top5_tp = np.zeros(num_classes, dtype=int)
+
+    top10_fp = np.zeros(num_classes, dtype=int)
+    top10_tp = np.zeros(num_classes, dtype=int)
 
     for data in dataloaders["test"]:
         inputs, labels, video_id = data  # inputs: b, c, t, h, w
@@ -164,14 +176,16 @@ def ensemble(mode, root, train_split, weights, num_classes):
     correct_10 = 0
     # confusion_matrix = np.zeros((num_classes,num_classes), dtype=np.int)
 
-    top1_fp = np.zeros(num_classes, dtype=np.int)
-    top1_tp = np.zeros(num_classes, dtype=np.int)
+# sandrine is changing all the np.int to int since apparently it was deprecated/removed
+# https://stackoverflow.com/questions/74946845/attributeerror-module-numpy-has-no-attribute-int
+    top1_fp = np.zeros(num_classes, dtype=int)
+    top1_tp = np.zeros(num_classes, dtype=int)
 
-    top5_fp = np.zeros(num_classes, dtype=np.int)
-    top5_tp = np.zeros(num_classes, dtype=np.int)
+    top5_fp = np.zeros(num_classes, dtype=int)
+    top5_tp = np.zeros(num_classes, dtype=int)
 
-    top10_fp = np.zeros(num_classes, dtype=np.int)
-    top10_tp = np.zeros(num_classes, dtype=np.int)
+    top10_fp = np.zeros(num_classes, dtype=int)
+    top10_tp = np.zeros(num_classes, dtype=int)
 
     for data in dataloaders["test"]:
         inputs, labels, video_id = data  # inputs: b, c, t, h, w
