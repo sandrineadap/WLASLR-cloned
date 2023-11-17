@@ -16,8 +16,8 @@ import torch.nn.functional as F
 from pytorch_i3d import InceptionI3d
 
 # from nslt_dataset_all import NSLT as Dataset
-from datasets.nslt_dataset_all import NSLT as Dataset
-# from datasets.nslt_dataset_all_pred import NSLT as Dataset # sandrine
+# from datasets.nslt_dataset_all import NSLT as Dataset
+from datasets.nslt_dataset_all_pred import NSLT as Dataset # sandrine
 import cv2
 
 
@@ -115,13 +115,21 @@ def run(init_lr=0.1,
     # setup dataset
     test_transforms = transforms.Compose([videotransforms.CenterCrop(224)])
 
-    val_dataset = Dataset(train_split, 'test', root, mode, test_transforms)
-    val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=1,
+    # val_dataset = Dataset(train_split, 'test', root, mode, test_transforms)
+    # val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=1,
+    #                                              shuffle=False, num_workers=2,
+    #                                              pin_memory=False)
+
+    # dataloaders = {'test': val_dataloader}
+    # datasets = {'test': val_dataset}
+
+    pred_dataset = Dataset(train_split, 'test', root, mode, test_transforms)
+    pred_dataloader = torch.utils.data.DataLoader(pred_dataset, batch_size=1,
                                                  shuffle=False, num_workers=2,
                                                  pin_memory=False)
 
-    dataloaders = {'test': val_dataloader}
-    datasets = {'test': val_dataset}
+    dataloaders = {'pred': pred_dataloader}
+    datasets = {'pred': pred_dataset}
 
     # setup the model
     if mode == 'flow':
@@ -143,18 +151,25 @@ def run(init_lr=0.1,
 # sandrine changed  all the np.int to int since apparently it was deprecated/removed
 # https://stackoverflow.com/questions/74946845/attributeerror-module-numpy-has-no-attribute-int
 
-    top1_fp = np.zeros(num_classes, dtype=int)
-    top1_tp = np.zeros(num_classes, dtype=int)
 
-    top5_fp = np.zeros(num_classes, dtype=int)
-    top5_tp = np.zeros(num_classes, dtype=int)
+    # top1_fp = np.zeros(num_classes, dtype=int)
+    # top1_tp = np.zeros(num_classes, dtype=int)
 
-    top10_fp = np.zeros(num_classes, dtype=int)
-    top10_tp = np.zeros(num_classes, dtype=int)
+    # top5_fp = np.zeros(num_classes, dtype=int)
+    # top5_tp = np.zeros(num_classes, dtype=int)
 
-    for data in dataloaders["test"]:
-        # print(data) # sandrine
-        inputs, labels, video_id = data  # inputs: b, c, t, h, w
+    # top10_fp = np.zeros(num_classes, dtype=int)
+    # top10_tp = np.zeros(num_classes, dtype=int)
+
+    # for data in dataloaders["test"]:
+    for data in dataloaders["pred"]:
+
+        print(type(data)) # sandrine
+        print(data)
+        # inputs, labels, video_id = data  # inputs: b, c, t, h, w
+        inputs, video_id = data
+        # print(type(inputs))
+        # print(inputs)
 
         per_frame_logits = i3d(inputs)
 
@@ -168,6 +183,9 @@ def run(init_lr=0.1,
         # print("out_probs")
         # print(out_probs[0])
 
+        print(video_id, torch.argmax(predictions[0]).item()) # sandrine. print what the prediction is
+
+'''
         if labels[0].item() in out_labels[-5:]:
             correct_5 += 1
             top5_tp[labels[0].item()] += 1
@@ -184,6 +202,7 @@ def run(init_lr=0.1,
         else:
             top1_fp[labels[0].item()] += 1
         print(torch.argmax(predictions[0]).item()) # sandrine. print what the prediction is
+        # print(predictions[0][torch.argmax(predictions[0]).item()])
         print(labels[0].item()) # sandrine. print what the label was
         print(video_id, float(correct) / len(dataloaders["test"]), float(correct_5) / len(dataloaders["test"]),
               float(correct_10) / len(dataloaders["test"]))
@@ -193,7 +212,7 @@ def run(init_lr=0.1,
     top5_per_class = np.mean(top5_tp / (top5_tp + top5_fp))
     top10_per_class = np.mean(top10_tp / (top10_tp + top10_fp))
     print('top-k average per class acc: {}, {}, {}'.format(top1_per_class, top5_per_class, top10_per_class))
-
+'''
 
 def ensemble(mode, root, train_split, weights, num_classes):
     # setup dataset
@@ -328,8 +347,8 @@ if __name__ == '__main__':
     num_classes = 2000 # sandrine. originally 2000
     save_model = './checkpoints/'
 
-    root = '../../data/WLASL2000' # for testing the WLASL2000 dataset
-    # root = '../../data/one_video_test' # sandrine
+    # root = '../../data/WLASL2000' # for testing the WLASL2000 dataset
+    root = '../../data/one_video_test' # sandrine
 
     # train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
     train_split = 'preprocess/nslt_2000.json'

@@ -110,10 +110,11 @@ def make_dataset(split_file, split, root, mode, num_classes):
         if mode == 'flow':
             num_frames = num_frames // 2
 
-        label = np.zeros((num_classes, num_frames), np.float32)
+        #label = np.zeros((num_classes, num_frames), np.float32)
 
         # dataset.append((vid, data[vid]['action'][0], 0, num_frames, "{}".format(vid)))
-        dataset.append((vid, label, 0, 'action', "{}".format(vid)))
+        # dataset.append((vid, label, 0, 'action', "{}".format(vid)))
+        dataset.append((vid, 0, num_frames, "{}".format(vid)))
         # i += 1
     else:
         print("os path does not exist") # sandrine
@@ -153,7 +154,8 @@ class NSLT(data_utl.Dataset):
         Returns:
             tuple: (image, target) where target is class_index of the target class.
         """
-        vid, label, start_f, start_e, output_name = self.data[index]
+        # vid, label, start_f, start_e, output_name = self.data[index]
+        vid, start_f, start_e, output_name = self.data[index] # sandrine
 
         if self.mode == 'rgb':
             # imgs = load_rgb_frames(self.root, vid, start_f, start_e)
@@ -165,7 +167,8 @@ class NSLT(data_utl.Dataset):
 
         imgs = self.transforms(imgs)
         ret_img = video_to_tensor(imgs)
-        return ret_img, label, vid
+        # return ret_img, label, vid
+        return ret_img, vid
 
     def __len__(self):
         return len(self.data)
