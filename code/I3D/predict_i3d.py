@@ -164,8 +164,8 @@ def run(init_lr=0.1,
     # for data in dataloaders["test"]:
     for data in dataloaders["pred"]:
 
-        print(type(data)) # sandrine
-        print(data)
+        # print(type(data)) # sandrine
+        # print(data)
         # inputs, labels, video_id = data  # inputs: b, c, t, h, w
         inputs, video_id = data
         # print(type(inputs))
@@ -183,7 +183,18 @@ def run(init_lr=0.1,
         # print("out_probs")
         # print(out_probs[0])
 
-        print(video_id, torch.argmax(predictions[0]).item()) # sandrine. print what the prediction is
+        # print(video_id, torch.argmax(predictions[0]).item()) # sandrine. print what the prediction is
+
+        # display what word the prediction was
+        word_list = open("../../wlasl-complete/wlasl_class_list.txt")
+        content = word_list.readlines()
+        print(video_id, torch.argmax(predictions[0]).item(), content[torch.argmax(predictions[0]).item()].split("	", 1)[1]) # sandrine. print what the prediction is
+
+        k = 3
+        print("Top", k, "predictions:")
+        topk_preds = torch.topk(predictions[0], 3).indices
+        for pred in topk_preds:
+            print(video_id, pred.item(), content[pred].split("	", 1)[1]) # get top k predictions
 
 '''
         if labels[0].item() in out_labels[-5:]:
