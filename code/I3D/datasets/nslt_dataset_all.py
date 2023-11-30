@@ -32,15 +32,28 @@ def load_rgb_frames_from_video(vid_root, vid, start, num):
     vidcap.set(cv2.CAP_PROP_POS_FRAMES, start)
     for offset in range(num):
         success, img = vidcap.read()
+        try: 
+            w, h, c = img.shape
+            if w < 226 or h < 226:
+                d = 226. - min(w, h)
+                sc = 1 + d / min(w, h)
+                img = cv2.resize(img, dsize=(0, 0), fx=sc, fy=sc)
+            img = (img / 255.) * 2 - 1
+            
+            frames.append(img)
+            
+            # print(type(img))
+            # print(video_path)
+        except:
+            print("task failed")
+            print(type(img))
+            print(video_path)
+            
+            f = open("failed_paths.txt", "a+")
+            f.write(video_path)
+            f.write('\n')
+            f.close()
 
-        w, h, c = img.shape
-        if w < 226 or h < 226:
-            d = 226. - min(w, h)
-            sc = 1 + d / min(w, h)
-            img = cv2.resize(img, dsize=(0, 0), fx=sc, fy=sc)
-        img = (img / 255.) * 2 - 1
-
-        frames.append(img)
 
     return np.asarray(frames, dtype=np.float32)
 
@@ -93,6 +106,7 @@ def make_dataset(split_file, split, root, mode, num_classes):
             continue
         video_path = os.path.join(root, vid + '.mp4')
         if not os.path.exists(video_path):
+            # print("os path does not exist") # sandrine
             continue
         # num_frames = data[vid]['action'][2] - data[vid]['action'][1]
         num_frames = int(cv2.VideoCapture(video_path).get(cv2.CAP_PROP_FRAME_COUNT))
