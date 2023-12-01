@@ -188,11 +188,11 @@ def run(init_lr=0.1,
         # display what word the prediction was
         word_list = open("../../wlasl-complete/wlasl_class_list.txt")
         content = word_list.readlines()
-        print(video_id, torch.argmax(predictions[0]).item(), content[torch.argmax(predictions[0]).item()].split("	", 1)[1]) # sandrine. print what the prediction is
+        # print(video_id, torch.argmax(predictions[0]).item(), content[torch.argmax(predictions[0]).item()].split("	", 1)[1]) # sandrine. print what the prediction is
 
-        k = 3
+        k = 10
         print("Top", k, "predictions:")
-        topk_preds = torch.topk(predictions[0], 3).indices
+        topk_preds = torch.topk(predictions[0], k).indices
         for pred in topk_preds:
             print(video_id, pred.item(), content[pred].split("	", 1)[1]) # get top k predictions
 
