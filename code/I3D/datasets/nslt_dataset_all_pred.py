@@ -22,7 +22,8 @@ def video_to_tensor(pic):
 
 
 def load_rgb_frames_from_video(vid_root, vid, start, num):
-    video_path = os.path.join(vid_root, vid + '.mp4')
+    # video_path = os.path.join(vid_root, vid + '.mp4')
+    video_path = os.path.join(vid_root, vid)
 
     vidcap = cv2.VideoCapture(video_path)
     # vidcap = cv2.VideoCapture('/home/dxli/Desktop/dm_256.mp4')
@@ -103,22 +104,31 @@ def make_dataset(split_file, split, root, mode, num_classes):
 
     # i = 0
     # for vid in data.keys():
-    vid = 'user_vid'
-    video_path = os.path.join(root, vid + '.mp4')
-    if os.path.exists(video_path):
-        num_frames = int(cv2.VideoCapture(video_path).get(cv2.CAP_PROP_FRAME_COUNT))
-        if mode == 'flow':
-            num_frames = num_frames // 2
 
-        #label = np.zeros((num_classes, num_frames), np.float32)
+    #vid = 'user_vid'
+    # video_path = os.path.join(root, vid + '.mp4')
 
-        # dataset.append((vid, data[vid]['action'][0], 0, num_frames, "{}".format(vid)))
-        # dataset.append((vid, label, 0, 'action', "{}".format(vid)))
-        dataset.append((vid, 0, num_frames, "{}".format(vid)))
-        # i += 1
-    else:
-        print("os path does not exist") # sandrine
-        # continue
+    # print(dir_list[0], type(dir_list[0]))
+    dir_list = os.listdir(root) # list of all files in root directory. this should just be one video
+
+    for i in range(len(dir_list)):
+        vid = dir_list[i] # extract name of file in directory
+        video_path = os.path.join(root, vid)
+
+        if os.path.exists(video_path):
+            num_frames = int(cv2.VideoCapture(video_path).get(cv2.CAP_PROP_FRAME_COUNT))
+            if mode == 'flow':
+                num_frames = num_frames // 2
+
+            #label = np.zeros((num_classes, num_frames), np.float32)
+
+            # dataset.append((vid, data[vid]['action'][0], 0, num_frames, "{}".format(vid)))
+            # dataset.append((vid, label, 0, 'action', "{}".format(vid)))
+            dataset.append((vid, 0, num_frames, "{}".format(vid)))
+            # i += 1
+        else:
+            print("os path does not exist") # sandrine
+            # continue
     print(len(dataset))
     return dataset
 
