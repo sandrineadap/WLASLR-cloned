@@ -192,9 +192,13 @@ def run(init_lr=0.1,
 
         k = 10
         print("Top", k, "predictions:")
+        f = open("predictions.txt", "a+")
+        f.write("\nTop " + str(k) + " predictions:" + "\n")
         topk_preds = torch.topk(predictions[0], k).indices
         for pred in topk_preds:
             print(video_id, pred.item(), content[pred].split("	", 1)[1]) # get top k predictions
+            f.write(str(video_id) + " " + str(pred.item()) + " " + str(content[pred].split("	", 1)[1]))
+        f.close()
 
 '''
         if labels[0].item() in out_labels[-5:]:
@@ -355,14 +359,15 @@ if __name__ == '__main__':
     # ================== test i3d on a dataset ==============
     # need to add argparse
     mode = 'rgb'
-    num_classes = 2000 # sandrine. originally 2000
+    num_classes = 100 # originally 2000. using dataset of 100. also changed weights location
     save_model = './checkpoints/'
 
     # root = '../../data/WLASL2000' # for testing the WLASL2000 dataset
     root = '../../data/one_video_test' # sandrine
 
-    # train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
-    train_split = 'preprocess/nslt_2000.json'
-    weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt'
+    train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
+    # train_split = 'preprocess/nslt_2000.json'
+    # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt'
+    weights = 'archived/asl100/FINAL_nslt_100_iters=896_top1=65.89_top5=84.11_top10=89.92.pt'
 
     run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights)
