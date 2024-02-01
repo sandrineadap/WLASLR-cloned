@@ -441,3 +441,75 @@ Top 10 predictions:
 ('mother-red-3.mp4',) 63 forget
 ('mother-red-3.mp4',) 71 secretary
 ('mother-red-3.mp4',) 33 blue
+
+Top 10 predictions:
+('book-gray-1.mp4',) 7 who
+('book-gray-1.mp4',) 2 computer
+('book-gray-1.mp4',) 8 candy
+('book-gray-1.mp4',) 1 drink
+('book-gray-1.mp4',) 0 book
+('book-gray-1.mp4',) 3 before
+('book-gray-1.mp4',) 6 clothes
+('book-gray-1.mp4',) 5 go
+('book-gray-1.mp4',) 9 cousin
+('book-gray-1.mp4',) 4 chair
+
+Top 10 predictions:
+('book-gray-2.mp4',) 7 who
+('book-gray-2.mp4',) 2 computer
+('book-gray-2.mp4',) 8 candy
+('book-gray-2.mp4',) 1 drink
+('book-gray-2.mp4',) 0 book
+('book-gray-2.mp4',) 3 before
+('book-gray-2.mp4',) 5 go
+('book-gray-2.mp4',) 9 cousin
+('book-gray-2.mp4',) 4 chair
+('book-gray-2.mp4',) 6 clothes
+
+Top 10 predictions:
+('book-gray-3.mp4',) 7 who
+('book-gray-3.mp4',) 2 computer
+('book-gray-3.mp4',) 8 candy
+('book-gray-3.mp4',) 1 drink
+('book-gray-3.mp4',) 0 book
+('book-gray-3.mp4',) 6 clothes
+('book-gray-3.mp4',) 3 before
+('book-gray-3.mp4',) 5 go
+('book-gray-3.mp4',) 9 cousin
+('book-gray-3.mp4',) 4 chair
+
+Top 10 predictions:
+('book-red-1.mp4',) 8 candy
+('book-red-1.mp4',) 2 computer
+('book-red-1.mp4',) 7 who
+('book-red-1.mp4',) 0 book
+('book-red-1.mp4',) 3 before
+('book-red-1.mp4',) 4 chair
+('book-red-1.mp4',) 9 cousin
+('book-red-1.mp4',) 1 drink
+('book-red-1.mp4',) 6 clothes
+('book-red-1.mp4',) 5 go
+
+Top 10 predictions:
+('book-red-2.mp4',) 8 candy
+('book-red-2.mp4',) 2 computer
+('book-red-2.mp4',) 7 who
+('book-red-2.mp4',) 3 before
+('book-red-2.mp4',) 0 book
+('book-red-2.mp4',) 9 cousin
+('book-red-2.mp4',) 4 chair
+('book-red-2.mp4',) 1 drink
+('book-red-2.mp4',) 6 clothes
+('book-red-2.mp4',) 5 go
+
+Top 10 predictions:
+('book-red-3.mp4',) 8 candy
+('book-red-3.mp4',) 2 computer
+('book-red-3.mp4',) 7 who
+('book-red-3.mp4',) 3 before
+('book-red-3.mp4',) 9 cousin
+('book-red-3.mp4',) 0 book
+('book-red-3.mp4',) 1 drink
+('book-red-3.mp4',) 4 chair
+('book-red-3.mp4',) 6 clothes
+('book-red-3.mp4',) 5 go

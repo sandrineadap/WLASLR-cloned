@@ -365,10 +365,12 @@ if __name__ == '__main__':
     # root = '../../data/WLASL2000' # for testing the WLASL2000 dataset
     root = '../../data/one_video_test' # sandrine
 
-    # train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
-    train_split = 'preprocess/nslt_10_50-59.json'.format(num_classes) # sandrine
+    train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
+    # train_split = 'preprocess/nslt_10_50-59.json'.format(num_classes) # sandrine
     # train_split = 'preprocess/nslt_2000.json'
-    # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt'
-    weights = 'archived/asl100/FINAL_nslt_100_iters=896_top1=65.89_top5=84.11_top10=89.92.pt'
+    # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt' # for 2000 words
+    # weights = 'archived/asl100/FINAL_nslt_100_iters=896_top1=65.89_top5=84.11_top10=89.92.pt' # for 100 words
+
+    weights = 'archived/asl10/nslt_10_016236_0.885714.pt' # for first 10 words
 
     run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights)
