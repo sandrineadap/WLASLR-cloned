@@ -194,11 +194,14 @@ if __name__ == '__main__':
     root = {'word': '../../data/WLASL2000'}
 
     save_model = 'checkpoints/'
-    train_split = 'preprocess/nslt_2000.json'
+    # train_split = 'preprocess/nslt_100.json' # Sandrine
+    train_split = 'preprocess/nslt_10.json' # sandrine
+
 
     # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt'
     weights = None
-    config_file = 'configfiles/asl2000.ini'
+    # config_file = 'configfiles/asl2000.ini' # sandrine
+    config_file = 'configfiles/asl10.ini'
 
     configs = Config(config_file)
     print(root, train_split)

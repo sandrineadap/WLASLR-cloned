@@ -359,13 +359,14 @@ if __name__ == '__main__':
     # ================== test i3d on a dataset ==============
     # need to add argparse
     mode = 'rgb'
-    num_classes = 100 # originally 2000. using dataset of 100. also changed weights location
+    num_classes = 10 # originally 2000. using dataset of 100. also changed weights location
     save_model = './checkpoints/'
 
     # root = '../../data/WLASL2000' # for testing the WLASL2000 dataset
     root = '../../data/one_video_test' # sandrine
 
-    train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
+    # train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
+    train_split = 'preprocess/nslt_10_50-59.json'.format(num_classes) # sandrine
     # train_split = 'preprocess/nslt_2000.json'
     # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt'
     weights = 'archived/asl100/FINAL_nslt_100_iters=896_top1=65.89_top5=84.11_top10=89.92.pt'
