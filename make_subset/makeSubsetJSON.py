@@ -1,8 +1,43 @@
-# redefining sets
+#######################################################################
+# A combination of Dr. Will's scripts: 
+# Select_signs_JSON.ipynb
+#   Selects by word ID any words from an existing dataset. (IDs: line 36. Dataset: line 34)
+#   Creates a new subset from selected words. (nslt_selected.json)
+# VideoDatasetJSON.ipynb (VideoDatasetJSON (2).ipynb)
+#   renumbers word ID's based on the positions entered in the code.
+#   resplits subset into train, test, and validation sets: 60/20/20. (nslt_adjusted.json)
+#######################################################################
 
+#################### Select_signs_JSON.ipynb
 import json
 import numpy as np
 
+def read_and_show_json(file_path,signs,output_path):
+    output="{"
+    try:
+        with open(file_path, 'r') as file:
+            json_content = json.load(file)
+            for key, value in json_content.items():
+                if json.dumps(value["action"][0]) in signs:
+                    output+= '"'+key+'": '+json.dumps(value)+', '
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        
+    out = output[:-2]+"}"
+
+    f = open(output_path, "w")
+    f.write(out)
+    f.close()
+
+    return out
+
+json_file_path = '../wlasl-complete/nslt_2000.json'
+output_path = 'nslt_selected.json'
+signs = ["566", "255", "164", "30", "86", "12", "234", "333", "327", "139"] # word id's to select
+
+out = read_and_show_json(json_file_path,signs,output_path)
+
+#################### VideoDatasetJSON (2).ipynb
 def countPercent(file_path):
     sets = np.array(["train","test","val"])
     countSets = np.array([0,0,0])
@@ -32,7 +67,8 @@ def randomArray(N, a, b, c):
     total_elements = a + b + c
     if total_elements != 100:
         raise ValueError("Percentages should add up to 100.")
-    array = ["train"] * (N * a // 100) + ["test"] * (N * b // 100) + ["val"] * (N * c // 100)
+    # I changed the following line because sometimes it wouldn't add up to the required number of videos due to the flooring action.
+    array = ["test"] * (int(round((N * b / 100), 0))) + ["val"] * (int(round((N * c // 100), 0))) + ["train"] * (N - ((N * b // 100) + (N * c // 100)))
     random.shuffle(array)
     return array
 
@@ -52,10 +88,13 @@ def printSets(file_path):
 import random 
 
 def redefineSets(test, val, file_path, output_path):
-    ids = getVideoIDs(file_path)
+    ids = getWordIDs(file_path)
     train = 100 - (test+val)
     N = countVideos(file_path)
     randSets = randomArray(N, train, test, val)
+    # print(N)
+    # print(len(randSets))
+    # print(randSets)
     count = 0
     output="{"
     try:
@@ -68,6 +107,8 @@ def redefineSets(test, val, file_path, output_path):
                 output += newValue
     except FileNotFoundError:
         print(f"File not found: {file_path}")
+    # except IndexError:
+    #     print(f"List index out of range: {count}")
     out = output[:-2]+"}"
 
     f = open(output_path, "w")
@@ -75,7 +116,7 @@ def redefineSets(test, val, file_path, output_path):
     f.close()
     return out
 
-def getVideoIDs(file_path):
+def getWordIDs(file_path):
     ids=[]
     try:
         with open(file_path, 'r') as file:
@@ -86,21 +127,23 @@ def getVideoIDs(file_path):
     except FileNotFoundError:
         print(f"File not found: {file_path}")
         
-    ids.sort()
+    #ids.sort()
     return ids
 
 json_file_path = 'nslt_selected.json'
-ids = getVideoIDs(json_file_path)
+ids = getWordIDs(json_file_path)
 print(ids)
+print(list(map(int, signs)))
 
-# json_file_path = 'nslt_selected.json'
 json_file_path = 'nslt_selected.json'
 json_output_path = 'nslt_ajusted.json'
 test = 20
 val = 20
 # train will be 100 - (test + val)
-out = redefineSets(test,val, json_file_path,json_output_path)
+out = redefineSets(test, val, json_file_path,json_output_path)
 #print(out)
+
+print(getWordIDs(json_output_path))
 
 # checking the new set definitions
 sets = countPercent(json_output_path)
