@@ -8,4 +8,4 @@ import torch
 import torchvision 
 from torch.utils.mobile_optimizer import optimize_for_mobile
 
-model = 
+#model = 
