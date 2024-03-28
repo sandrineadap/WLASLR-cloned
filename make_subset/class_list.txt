@@ -1,10 +1,10 @@
 0	my
-1	help
-2	what
-3	thank you
-4	again
-5	please
-6	name
-7	how
-8	your
-9	sorry
+1	your
+2	name
+3	what
+4	how
+5	help
+6	please
+7	thank you
+8	sorry
+9	again
