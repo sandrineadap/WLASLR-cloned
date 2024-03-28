@@ -1,9 +1,10 @@
 ########################################################
 # to predict on different weights, change:
-#   num_classes (line 370)
-#   root        (line 374)
-#   train_split (line 377)
-#   weights     (line 381. depending on number of classes)
+#   num_classes (line 371)
+#   root        (line 375)
+#   train_split (line 378)
+#   weights     (line 382. depending on number of classes)
+#   word_list   (line 198)
 ########################################################
 
 import math
@@ -194,7 +195,7 @@ def run(init_lr=0.1,
         # print(video_id, torch.argmax(predictions[0]).item()) # sandrine. print what the prediction is
 
         # display what word the prediction was
-        word_list = open("../../wlasl-complete/wlasl_class_list.txt")
+        word_list = open("../../wlasl-complete/wlasl_class_list_01.txt") # change here. must refer to the correct word list!!!
         content = word_list.readlines()
         # print(video_id, torch.argmax(predictions[0]).item(), content[torch.argmax(predictions[0]).item()].split("	", 1)[1]) # sandrine. print what the prediction is
 
