@@ -1,3 +1,11 @@
+########################################################
+# to predict on different weights, change:
+#   num_classes (line 370)
+#   root        (line 374)
+#   train_split (line 377)
+#   weights     (line 381. depending on number of classes)
+########################################################
+
 import math
 import os
 import argparse
@@ -30,7 +38,7 @@ parser.add_argument('-root', type=str)
 
 args = parser.parse_args()
 
-# Sandrine added:
+# Sandrine added: (do I need this)
 def predict_on_video(video_file_path, output_file_path):
     '''
     This program will perform ASL recognition ona video using the I3D model.
@@ -359,18 +367,17 @@ if __name__ == '__main__':
     # ================== test i3d on a dataset ==============
     # need to add argparse
     mode = 'rgb'
-    num_classes = 10 # originally 2000. using dataset of 100. also changed weights location
+    num_classes = 10 # change here. originally 2000.
     save_model = './checkpoints/'
 
-    # root = '../../data/WLASL2000' # for testing the WLASL2000 dataset
-    root = '../../data/one_video_test' # sandrine
+    # root = '../../data/WLASL2000' # sandrine. for testing the WLASL2000 dataset
+    root = '../../data/one_video_test' # change here. This is the directory of the video(s) to be tested
 
-    train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine
-    # train_split = 'preprocess/nslt_10_50-59.json'.format(num_classes) # sandrine
-    # train_split = 'preprocess/nslt_2000.json'
+    # train_split = 'preprocess/nslt_{}.json'.format(num_classes) # sandrine. use this for when the train_split name is just a number
+    train_split = 'preprocess/nslt_10_01.json'.format(num_classes) # change here
+
     # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt' # for 2000 words
     # weights = 'archived/asl100/FINAL_nslt_100_iters=896_top1=65.89_top5=84.11_top10=89.92.pt' # for 100 words
-
-    weights = 'archived/asl10/nslt_10_016236_0.885714.pt' # for first 10 words
+    weights = 'archived/asl10_01/nslt_10_008800_0.812500.pt' # change here. paste best weights from checkpoints here. 
 
     run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights)
