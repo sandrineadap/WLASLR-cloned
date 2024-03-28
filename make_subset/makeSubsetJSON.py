@@ -88,7 +88,8 @@ def printSets(file_path):
 import random 
 
 def redefineSets(test, val, file_path, output_path):
-    ids = getWordIDs(file_path)
+    ids = getWordIDs(file_path)     # change here. comment out to keep the order from given id list (line 36).
+    # ids = list(map(int, signs))   # change here. use this to keep the order from given id list (line 36)
     train = 100 - (test+val)
     N = countVideos(file_path)
     randSets = randomArray(N, train, test, val)
@@ -131,8 +132,9 @@ def getWordIDs(file_path):
     return ids
 
 json_file_path = 'nslt_selected.json'
-ids = getWordIDs(json_file_path)
-print(ids)
+ids = getWordIDs(json_file_path)    # change here. comment out to keep the order from given id list (line 36).
+print(ids)                          # change here. comment out to keep the order from given id list (line 36).
+# ids = list(map(int, signs))   # change here. use this to keep the order from given id list (line 36)
 print(list(map(int, signs)))
 
 json_file_path = 'nslt_selected.json'
@@ -144,6 +146,17 @@ out = redefineSets(test, val, json_file_path,json_output_path)
 #print(out)
 
 print(getWordIDs(json_output_path))
+
+new_ids = getWordIDs(json_output_path)
+
+word_list = open("../wlasl-complete/wlasl_class_list.txt")
+content = word_list.readlines()
+
+f = open("class_list.txt", "w")
+for id in new_ids: 
+    f.write(str(id) + "	" + str(content[int(ids[id])].split("	", 1)[1]))
+    # f.write(str(id) + "	" + str(content[int(signs[id])].split("	", 1)[1])) # change here. use this to keep the order from given id list (line 36)
+f.close()
 
 # checking the new set definitions
 sets = countPercent(json_output_path)
