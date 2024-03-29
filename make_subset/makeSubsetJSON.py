@@ -139,8 +139,8 @@ print(list(map(int, signs)))
 
 json_file_path = 'nslt_selected.json'
 json_output_path = 'nslt_ajusted.json'
-test = 17
-val = 17
+test = 15
+val = 15
 # train will be 100 - (test + val)
 out = redefineSets(test, val, json_file_path,json_output_path)
 #print(out)
