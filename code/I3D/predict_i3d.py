@@ -379,6 +379,6 @@ if __name__ == '__main__':
 
     # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt' # for 2000 words
     # weights = 'archived/asl100/FINAL_nslt_100_iters=896_top1=65.89_top5=84.11_top10=89.92.pt' # for 100 words
-    weights = 'archived/asl10_01/nslt_10_008800_0.812500.pt' # change here. paste best weights from checkpoints here. 
+    weights = 'archived/asl10_01/nslt_10_009200_0.714286.pt' # change here. paste best weights from checkpoints here. 
 
     run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights)

@@ -290,6 +290,6 @@ if __name__ == '__main__':
     # train_split = 'preprocess/nslt_{}.json'.format(num_classes) # use this for when the train_split name is just a number
     train_split = 'preprocess/nslt_10_01.json'  # change here
     # weights = 'archived/asl2000/FINAL_nslt_2000_iters=5104_top1=32.48_top5=57.31_top10=66.31.pt'
-    weights = 'archived/asl10_01/nslt_10_008800_0.812500.pt' # change here. paste best weights from checkpoints here. 
+    weights = 'archived/asl10_01/nslt_10_009200_0.714286.pt' # change here. paste best weights from checkpoints here. 
 
     run(mode=mode, root=root, save_model=save_model, train_split=train_split, weights=weights)
