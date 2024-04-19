@@ -1,4 +1,4 @@
-*This repository was cloned from Dongxu Li et al.'s [WLASL repository](https://github.com/dxli94/WLASL), whose dataset was made open source for research purposes. This project investigates the I3D model's usability for a mobile application. A demo of the mobile app we've developed so far, called Sign&#8226;a&#8226;Mander, can be found [here](https://drive.google.com/file/d/1EyIwe2gwZ9dp2kES_Tdl19bG3JTf5Vj1/view?usp=sharing).*
+*This repository was forked from Dongxu Li et al.'s [WLASL repository](https://github.com/dxli94/WLASL), whose dataset was made open source for research purposes. This project investigates the I3D model's usability for a mobile application. A demo of the mobile app we've developed so far, called Sign&#8226;a&#8226;Mander, can be found [here](https://drive.google.com/file/d/1EyIwe2gwZ9dp2kES_Tdl19bG3JTf5Vj1/view?usp=sharing).*
 
 ***
 
