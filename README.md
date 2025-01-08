@@ -11,3 +11,10 @@ When you clone this repository, you will need to download a few zip files for th
 Note: I downloaded Li et al.'s entire dataset via Kaggle: [https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed).
 
 Please refer to the original repository's README for additional instructions. You can also find it here with the file name `README-WLASL.md`.
+
+***
+
+### Links:
+- [Read my research paper](https://digitalcommons.andrews.edu/honors/275/) 
+- [Demo of the mobile app so far](https://drive.google.com/file/d/1EyIwe2gwZ9dp2kES_Tdl19bG3JTf5Vj1/view?usp=sharing)
+- [Github repository of the app]([https://github.com/sandrineadap/WLASLR-cloned](https://github.com/sandrineadap/aslmala))
