@@ -17,4 +17,4 @@ Please refer to the original repository's README for additional instructions. Yo
 ### Links:
 - [Read my research paper](https://digitalcommons.andrews.edu/honors/275/) 
 - [Demo of the mobile app so far](https://drive.google.com/file/d/1EyIwe2gwZ9dp2kES_Tdl19bG3JTf5Vj1/view?usp=sharing)
-- [Github repository of the app]([https://github.com/sandrineadap/WLASLR-cloned](https://github.com/sandrineadap/aslmala)
+- [Github repository of the app](https://github.com/sandrineadap/aslmala)
